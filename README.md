@@ -1,3 +1,48 @@
+# Complete Intro to React, v5
+---
+![]()
+
+## Course Description
+Learn to build real-world applications using modern React! Much more than an intro, you’ll start from the ground up, getting all the way to using the latest features in React, including hooks, effects, context, and portals. Throughout the course, you’ll piece together tools from the entire React ecosystem (like Reach Router) to build a full application to browse adoptable pets.
+Published: June 4, 2019
+
+# Annotations
+Notes are organzied by video section as structured by FEM. 
+
+### Tasks
+- [ ] Phase 1: First Run Through
+- [ ] Phase 2: Draft Self-Assessment docs and Scoresheets
+- [ ] Phase 3: Revisit & Review 
+
+## Table of Contents
+- Introduction: 
+- Pure React
+- Tools:
+- JSX:
+- Hooks:
+- Effects:
+- Dev Tools:
+- Async & Routing:
+- Class Components:
+- Error Boundaries:
+- Context:
+- Portals:
+- Wrapping Up:
+- **self-assessment**
+    - Introduction: 
+    - Pure React
+    - Tools:
+    - JSX:
+    - Hooks:
+    - Effects:
+    - Dev Tools:
+    - Async & Routing:
+    - Class Components:
+    - Error Boundaries:
+    - Context:
+    - Portals:
+    - Wrapping Up:
+    
 # Welcome to the Complete Intro to React v5 and Intermediate React v2!
 
 [See the course website here][v5].
