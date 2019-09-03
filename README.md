@@ -1,4 +1,4 @@
-# Complete Intro to React, v5
+# [Complete Intro to React, v5](https://frontendmasters.com/courses/complete-react-v5/)
 ---
 ![](https://user-images.githubusercontent.com/5563119/64191175-c3c71d80-ce2c-11e9-8906-61d169d3cd11.png)
 
