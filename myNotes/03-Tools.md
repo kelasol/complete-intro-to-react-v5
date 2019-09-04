@@ -351,7 +351,7 @@ Okay and so we used Parcel. I told you could use Webpack this would 100% work wi
 
 ### Commit # to catch up.
 
-At this point, now we've introduced a package.json so if you're moving forward and commit points in the course, make sure you move forward in the commit, and then you run npm install afterwards, right?
+At this point, now we've introduced a package.json so if you're moving forward and commit points in the course, make sure you move **forward in the commit, and then you run npm install afterwards**, right?
 
 So if I come to my terminal here, not this one, this one. And I say, if I moved forward in the commit, I would have to say, npm install, just like that. And it's gonna go run and install everything off of the npm registry. You don't have to do this if you've been following along, but just so you know, make sure that you're always keeping up with the npm installs as well.
 Otherwise, things won't work.

@@ -19,7 +19,7 @@ import React from "react";
 const SearchParams = () => {
   const location = "Seattle, WA";
 
-  return <div className="search-params"></div>;
+  return <div className="search-params" />;
 };
 ```
 
@@ -144,7 +144,11 @@ const SearchParams = () => {
 //...
 ```
 
-So instead of having this location here, I'm gonna say const, square bracket, location, comma, setLocation. = useState, and then the default state, which is gonna be Seattle, WA,
+### onChange handler still manages values provided by state/hooks
+
+So instead of having this location here,
+`const [location, setLocation] = useState("Seattle, WA");`
+I'm gonna say const, square bracket, location, comma, setLocation. = useState, **and then the default state**, which is gonna be Seattle, WA,
 Okay? Now, I have this location in this input. The thing you might notice, if you look at the console here, if I look at the console, it's probably gonna say, you provided a value prop to a form without a non-change handler.
 
 That's why. We're going to give this a on change handler. So I'm gonna say on change = curly braces. I'm going to give it just a tiny function to run whenever an event happens. So I'm gonna say, whenever there is an event, setLocation to be e.target value. So this is a little, little tiny function, right?
@@ -204,29 +208,31 @@ But for now, this is the way to do state with hooks.
 
 ## Best Practices for Hooks
 
-### Hooks never instead conditions
+### Hooks should NEVER be used in a conditional
 
+- React Hooks must be called in the exact same order in every component render.
 - :star: **An absolutely fundamental key thing that I need you to really understand right now with hooks is they never go inside of `if` statements, and they never go inside `for` loops or anything like that.**
 
 Why? So I can't say like, `if (something)`, I can't do this. This is not okay, never do this.
 
 **The way that hooks work is, basically, they're keeping track of the order that you're creating hooks**. So if I have another hook underneath this, like for example, like for the animal, and setAnimal. And we'll make this dog or something like that. **The way that they're keeping track of each individual piece of state is they're keeping track of the order that you're calling these things in**, right?
 
-So if I call these things out of order or if I have an if statement, and then, let's just imagine [INAUDIBLE], if something
-
 If this is true on the first call and false in the second call, this will be the first thing called, which means that this is going to get location instead of animal, which is going to mess up everything.
 
-So even if you're ignoring what is in useState, you still have to call useState outside of the if statement, outside of a for loop. So I'm actually gonna introduce you to an EL Synch rule that want to make you do that. But I just want to very much underscore the fact that you cannot put in an if statement and you cannot put in a for loop or really any sort of conditional or unpredictable logic.
+So even if you're ignoring what is in `useState`, you still have to call `useState` outside of the `if` statement, outside of a `for` loop. So I'm actually gonna introduce you to an ESLint rule that want to make you do that. **But I just want to very much underscore the fact that you cannot put in an `if` statement and you cannot put in a `for` loop or really any sort of conditional or unpredictable logic**.
 
-Inevitably, someone at this point in time is going to ask me like, but what if I'm very careful that it's called in the same order? Just don't, I will find you and then I will shame you. [LAUGH] Just kidding, I don't know, but please don't. It's actually underscored in the docs, so it's just something like just never do it.
+Inevitably, someone at this point in time is going to ask me like, but what if I'm very careful that it's called in the same order? Just don't, I will find you and then I will shame you.Just kidding, I don't know, but please don't. **It's actually underscored in the docs, so it's just something like just never do it**.
 
 Always make sure that they're outside of that.
 
 And this applies to all hooks, not just useState, all hooks in general. Make sure you are always using use something, right? That's a convention that React, if you use this convention, then the ES can help you enforce some of these rules,
 
-## Configuring ESLint for HOoks
+## Configuring ESLint for Hooks
 
-Open your console for just a second. I'm gonna stop my server, but you could just open a new terminal as well. I'm gonna say npm install -D eslint-plugin-react-hooks.
+### Rules for Writing React Hooks
+
+Open your console for just a second. I'm gonna stop my server, but you could just open a new terminal as well.
+I'm gonna say `npm install -D eslint-plugin-react-hooks`.
 This is official rules from the React team about writing hooks.
 So I want to introduce you to a couple of these.
 
@@ -239,13 +245,14 @@ And I have another one here that we should have in there. These ones, exhaustive
 So put in that one as well.
 
 And we'll do 1.
-So this one is going to force you to, we'll actually about later, but it has to do with the facts. So again, just to remind you, 0 is turn off, 1 is worn, and 2 is make it an error, right? So anytime that you mess up rule of hooks through an error, anytime that you have an exhaustive depths thing, it's just worn.
+So this one is going to force you to, we'll actually about later, but it has to do with the effects.
+**So again, just to remind you, 0 is turn off, 1 is warn, and 2 is make it an error** So anytime that you mess up rule of hooks through an error, anytime that you have an exhaustive depths thing, it's just warn.
 
 So let's take a look at what that actually does for us. If I say,
 if {false}, or something like that, I don't know, and then I put this in there, it's gonna say, hey look, or this one right here, where is it?
 There we go.
 
-React hook is called conditionally. React hooks must be called in the exact same order in component renders. And you can see that comes from rule of hooks.
+`React hook is called conditionally. React hooks must be called in the exact same order in component renders.` And you can see that comes from rule of hooks.
 
 Rules of hooks, that makes sense? So it's gonna prevent you from doing stuff like that.
 Now honestly, once you get used to doing that, and you just know never to do it, it's not really that helpful.
@@ -259,34 +266,38 @@ So, what I'm gonna do here, I'm gonna say, import,
 ANIMALS like this from @frontendmasters,
 /pet like that.
 
-Now, you and I have not installed this, right? This was not in our package.json, but parcel is smart enough to say, hey, this is out on the NPM registry, I'll just go grab it for you. So you don't have to NPM install it, it'll just do it for you.
+### Parcel auto-checks npm registry for imports
+
+Now, you and I have not installed this, right? This was not in our `package.json`, **but parcel is smart enough to say, hey, this is out on the NPM registry, I'll just go grab it for you. So you don't have to NPM install it, it'll just do it for you.**
 
 So if you see here, if I say save, it's gonna say Installing frontendmasters/pet right there.
 
-And, while it's installing, it will rebuild the project, and now it's available to us on a project. Okay, so we installed this frontendmasters/pet. If you feel more comfortable, you can just say npm install @frontendmasters/pet.
+- Aside: That's pretty neat.
+
+And, while it's installing, it will rebuild the project, and now it's available to us on a project. Okay, so we installed this `frontendmasters/pet`. If you feel more comfortable, you can just say npm install `@frontendmasters/pet`.
 
 But you can also have parcel just do it for him which is kind of a fun feature that it does for you.
-And, again, if you look in package.json you can see that it installed it. Here, frontrendmasters/pet and save that in their forest.
+And, again, if you look in `package.json` you can see that it installed it. Here, frontrendmasters/pet and save that in their forest.
 Magical.
 Okay, so now we have this ANIMAL's array which is just an array of strings I believe.
 
-And here, we're gonna say const animal, set animal = useState and we're gonna start with a dog,
+And here, we're gonna say const animal, set `animal = useState` and we're gonna start with a dog,
 Okay?
 Then we're gonna go down and then we are going to make underneath our input there, another label,
-htmlFor = animal.
-And inside of that, we're going to select Animal.
+`htmlFor = animal`.
+And inside of that, we're going to select `Animal`.
 
 And, we're gonna put a select inside of that. So select,
-id="animal",
-value= animal.
-onChange = e, and then setAnimal e.target.value.
+,
+`value= anima`l.
+`onChange = e`, and then `setAnimal` `e.target.value`.
 So I'm gonna show you something pretty cool that we've done already. So it's saying, hey, if you're gonna do onChange, I need you to have onBlur as well.
 
 Because some screen readers, when you're tabbing across things, don't trigger onChange events. Which means that your code would not work when being used with a screen reader, which is obviously a big party foul, right? And I love the jsx ally, just catches up for you and says like I'm not gonna let you go forward until you fix this, right?
 
 Obviously like, this is so distracting to see so many red lines, I just can't even handle myself, right? So, we can fix that by saying onBlur = e, setAnimal,
 
-e.target.value, as well, right? And now, it's all happy again cuz we fixed our accessibility issue,
+`e.target.value`, as well, right? And now, it's all happy again cuz we fixed our accessibility issue,
 Okay? And then we're gonna put a bunch of options in here of different types of animals that we can search for.
 
 So the first one, we put in here, is just a blank option. This is gonna represent when we search for all animals, right?
@@ -300,16 +311,21 @@ So what we have is a list of strings, and what we need back from it is a list of
 
 It makes sense? Like, we have a list of strings and we wanna turn those list of strings into a list of option components. Or option tabs or whatever you want to call them.
 
-Well, luckily, there’s something built directly into JavaScript that translates one array of things to another array of things, right, and it’s called map.
+Well, luckily, there’s something built directly into JavaScript that translates one array of things to another array of things, right, and it’s called `map`.
 
-So if I say animas.map, right, cuz it’s an array, then you give it a function that takes an item in that array and transforms it into something else. So I'm gonna take this string, right? Or, we'll just call it animal because that's what it is.
-And then we're gonna have that return in option component,
+So if I say `animals.map`, right, cuz it’s an array, then you give it a function that takes an item in that array and transforms it into something else. So I'm gonna take this string, right? Or, we'll just call it animal because that's what it is.
+And then we're gonna have that return in `option` component,
 
-With the value of that option component is going to be the animal. And, also that it's going to display animal.
+> Aside: So following along with code, I ran into some issues. One of them being, using a newer version of React, we have to specifiy useState for importing modules or use React.useState for hooks.
+> I had to start testing in Chrome since FF was giving me warnings about SSL and trusting content stuff.
+> I also had an issue with Parcel and the @frontendmasters/pets package. It was having a hard time understanding that syntax or something.
+> I feel like, because I don't understand a lot of the tooling and the nuances of the tooling, I'm less inclined to use them until I do.
+
+With the value of that `option` component is going to be the `animal`. And, also that it's going to display animal.
 Okay, it'll get a red line here for just a second which we'll fix in just one moment.
 So does this make sense? First of all,
 
-With arrow functions, you could have them implicit returned, right? So in this particular case, I had the arrow function and I have no curly braces, which means it’s implicitly returned. So this would be equivalent if I deleted this parentheses and deleted this one.
+With arrow functions, you could have them implicit returned, right? So in this particular case, I had the arrow function and I have no curly braces, which means it’s **implicitly returned**. So this would be equivalent if I deleted this parentheses and deleted this one.
 And I said return,
 
 Like that.
@@ -322,15 +338,19 @@ I have a list of various different options. It's just a tiny bit bigger. So ther
 
 ## Unique List Item Keys
 
-So it's saying, hey, I need a key, so let's talk about that for just a second. So how does React work in terms of like rerendering it? Everytime that something changes, it runs the rerender function here, right? So it runs this searchParams function again. I want you to imagine that maybe these options were more complicated.
+So it's saying, hey, I need a key, so let's talk about that for just a second.
 
-Maybe they were deeply of necetries of DOM structures, so let's say I had the ability to resort these options one way or another. Well, what React would typically see is, this is different than it was before, I'm gonna go rerender everything. But if I'm just resorting them into a different order, that would be a lot of a necessary work, quite slow, potentially.
+### How does React work in terms of rerendering?
 
-What would be really useful, is like, hey, React, I just reordered these. I didn't actually create and destroy anything, they're just in a different order now. And the way you can do that is you can say, key = some unique thing about that particular item. In this case they're all strings and I know they're all different.
+So how does React work in terms of like rerendering it? Everytime that something changes, it runs the rerender function here, right? So it runs this `searchParams` function again. I want you to imagine that maybe these options were more complicated.
+
+Maybe they were deeply of nested trees of DOM structures, so let's say I had the ability to resort these options one way or another. Well, what React would typically see is, this is different than it was before, I'm gonna go rerender everything. But if I'm just resorting them into a different order, that would be a lot of a necessary work, quite slow, potentially.
+
+_What would be really useful, is like, hey, React, I just reordered these. I didn't actually create and destroy anything, they're just in a different order now._ **And the way you can do that is you can say, key = some unique thing about that particular item**. In this case they're all strings and I know they're all different.
 
 So if I say key = [animal] then it's happy, because then it says if dog was here, but now it's down here. It's like I'm just going to take that option, I'm not gonna destroy it, I'm just gonna move it down there, so that's what key does. So it's a little performance thing that's really easy to do.
 
-So the key here is, it needs to be some sort of unique identifier about that particular object, right? So maybe if you're sorting user objects, you can sort it by the email, or their user ID, or something that's gonna be unique per user. Then if it moves here, and then it moves down here, it is the same thing.
+So the key here is, **it needs to be some sort of unique identifier about that particular object**, right? So maybe if you're sorting user objects, you can sort it by the email, or their user ID, or something that's gonna be unique per user. Then if it moves here, and then it moves down here, it is the same thing.
 
 So that React can tell it's the same thing, makes sense? Now something that's really important is it has to be unique, so if I put 1, right? Now all of these are gonna have a key of 1 and is going to freak out.
 
@@ -342,10 +362,53 @@ In this case, it actually is rendering them, so good for that, but sometimes it 
 
 ## Breed Dropdown
 
-We're gonna do the same thing but for breed. So breed and setBreed and we're just gonna make this initial state to be an empty object.
-And then it's gonna look really similar to animal. So underneath this label here, above the submit button, I'm gonna say label, htmlFor equals breed.
+```javascript
+import React, { useState, useEffect } from "react";
+import pet, { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown";
 
-And then we're gonna say, breed and another select.
+const SearchParams = () => {
+  const [location, updateLocation] = useState("Seattle, WA");
+  const [breeds, updateBreeds] = useState([]);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS);
+  const [breed, BreedDropdown, updateBreed] = useDropdown("Breed", "", breeds);
+
+  useEffect(() => {
+    updateBreeds([]);
+    updateBreed("");
+    pet.breeds(animal).then(({ breeds }) => {
+      const breedStrings = breeds.map(({ name }) => name);
+      updateBreeds(breedStrings);
+    }, console.error);
+  }, [animal]);
+
+  return (
+    <div className="search-params">
+      <form>
+        <label htmlFor="location">
+          Location
+          <input
+            id="location"
+            value={location}
+            placeholder="Location"
+            onChange={e => updateLocation(e.target.value)}
+          />
+        </label>
+        <AnimalDropdown />
+        <BreedDropdown />
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default SearchParams;
+```
+
+We're gonna do the same thing but for `breed`. So `breed` and `setBreed` and we're just gonna make this initial state to be an empty object.
+And then it's gonna look really similar to animal. So underneath this label here, above the submit button, I'm gonna say `label`, `htmlFor = breed`.
+
+And then we're gonna say, `breed` and another select.
 And then here we're gonna have inside of that id equals breed. Value = breed,
 From they're, we're gonna have onChanged = e returned e.target.value and we have to put that inside of setBreed.
 Then same thing for onBlur, onBlur.
@@ -353,18 +416,18 @@ Then same thing for onBlur, onBlur.
 There's one more thing we wanna do, if I switch from,
 Like cats to dogs, right? They have different breeds so I have to be constantly refreshing that list of breeds to reflective to of whatever the current animal is, right? So I can't have a poodle cat and I can't have a tabby dog.
 
-That sounds weird but you can't, right? So sometimes it'll be switching between these things because I'm gonna have to be constantly getting that from the API. So what we're gonna do is when I give it a disabled, so disabled = breed.length. So if breed.length is zero, then disable it, right?
+That sounds weird but you can't, right? So sometimes it'll be switching between these things because I'm gonna have to be constantly getting that from the API. So what we're gonna do is when I give it a disabled, so disabled = `breed.length`. So if `breed.length` is zero, then disable it, right?
 
-Then you want that to be true. You could also do this, breeds.length === 0, or,
+Then you want that to be true. You could also do this, `breeds.length` === 0, or,
 
 Yeah.
 We'll define breeds here in just a second, cuz that doesn't exist yet. But does this make sense, and the other thing this is another ligature that was talking about. It's three different equal signs, but it's put together.
 
-So now this will always be disabled, like people will not be able to click on it if breed.length is 0.
+So now this will always be disabled, like people will not be able to click on it if `breed.length` is 0.
 Okay, and then we're gonna do another thing where you can select all of them. So I'm gonna say option,
 All and then underneath that, we're going to have another one of these for loops or maps up there which is gonna be breeds.
 
-Again, which we'll define here in just a second, .map(breed, and then return for that an option.
+Again, which we'll define here in just a second, `.map`(breed, and then return for that an option.
 
 And inside of that option we'll have breed. Let's actually call this something different than breed cuz that's confusing. This would be like,
 Breed string or something like that.
@@ -374,21 +437,53 @@ And we have to get that as well the key of breed string and value of breedString
 
 It's pretty similar to above. Again, we'll define breed in just a second, but I'll let you catch that up. Okay, so come back up here to the top. Also underneath breed and breedString, we're also gonna have to keep track of breeds and setBreeds.
 
-And then it's initial state is gonna be an empty array, right? Because we're gonna be requesting against the APIs like I have a dog, give me back all of the dog breeds. So this is gonna be constantly changing depending on what the user is selecting.
+**And then it's initial state is gonna be an empty array**, right? Because we're gonna be requesting against the APIs like I have a dog, give me back all of the dog breeds. So this is gonna be constantly changing depending on what the user is selecting.
 Does that make sense?
 
 So for now, breeds is just gonna be an empty array. So no matter what, if you go look over here, you'll just see that it's always disabled. And set to all because we're never changing that.
 
 ## Custom Hooks
 
-Before we get to requesting against the API, I wanna show you how to do with something that's called a custom hook. So right now we've just been using useState all over the place, but if you notice HTML for animal, or this one here right animal and breed.
+Before we get to requesting against the API, I wanna show you how to do with something that's called a **custom hook**. So right now we've just been using useState all over the place, but if you notice HTML for animal, or this one here right animal and breed.
 
-These are almost the same thing, right, to the point that like, it'd be nice if we could have some sort of like reusable bit. That would do like a drop-down for us, and we didn't have to do all this song and circumstance. And we could maintain them together, so let's actually go do that.
+_These are almost the same thing, right, to the point that like, it'd be nice if we could have some sort of like reusable bit_. That would do like a drop-down for us, and we didn't have to do all this song and circumstance. And we could maintain them together, so let's actually go do that.
 
-So make a new file here, and call it useDropdown.js.
+So make a new file here, and call it `useDropdown.js`.
 
-Okay, here you wanna import React from 'react'.
-And we're also gonna use useState.
+```javascript
+import Reqact, { useState } from "react";
+
+const useDropdown = (label, defaultState, options) => {
+  const [state, setState] = useState(defaultState);
+  const id = `use-dropdown-${label.replace(" ", "").toLowerCase()}`;
+  const Dropdown = () => (
+    <label htmlFor={id}>
+      {label}
+      <select
+        id={id}
+        value={state}
+        onChange={e => setState(e.target.value)}
+        onBlur={e => setState(e.target.value)}
+        disabled={options.length === 0}
+      >
+        <option>All</option>
+        {options.map(item => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+
+  return [state, Dropdown, setState];
+};
+
+export default useDropdown;
+```
+
+Okay, here you wanna import `React` from `'react'`.
+And we're also gonna use `useState`.
 Okay, and then I'm gonna say const useDropdown, this is gonna be our hook that we're gonna create. And it's gonna take in a label, some sort of default state, and some sort of a list of options to put in there.
 
 Then down at the bottom we're going to export default useDropdown. So we're gonna say const state, useState, so we're gonna make this like a generic dropdown.
@@ -421,12 +516,13 @@ And then we're also gonna return this setState function as well.
 
 Like that, and now we can use this just like we used a hook, because this is gonna give us the state. The Dropdown's gonna handle all of the setting and unsetting of the state, right? And then just in case as well for later, we're gonna return this setState function.
 
-So that we can programmatically update it, in addition to using the Dropdown. So I understand this is a little abstract, we've taken the animal Dropdown and the breed Dropdown. And then we've just formed it into this kind of generic Dropdown hook.
+So that we can programmatically update it, in addition to using the Dropdown. So I understand this is a little abstract, we've taken the animal Dropdown and the breed Dropdown. **And then we've just formed it into this kind of generic Dropdown hook**.
 
 Good so far? All right, so let's go ahead and go back to the search params.
 
 And what we're gonna do, instead of doing animal and setAnimal, what we're gonna do is we're gonna say const.
 First thing is you have to import up top, so Import useDropown from ./useDropdown. We still need breeds so we'll keep track of that, but now what we're gonna do is we're gonna say const [animal, animalDropdown].
+`import useDropdown from './useDropdown';`
 
 And we'll actually just leave it at that for now, = useDropDown, and we'll give it Animals the label.
 
@@ -439,9 +535,9 @@ So now I just have the location one, which is different, we don't wanna make tha
 
 But what's cool is I just have an AnimalDropdown and a BreedDropdown.
 
-And that's pretty cool in my opinion, we've kinda taken out this logic, we extracted it out to this useDropdown hook. And now we just get these little AnimalDropdown, BreedDropddown, self contained dropdowns. So if I save this and I go back over to my code this all works exactly the same way now.
+**And that's pretty cool in my opinion, we've kinda taken out this logic, we extracted it out to this useDropdown hook. And now we just get these little AnimalDropdown, BreedDropddown, self contained dropdowns.** So if I save this and I go back over to my code this all works exactly the same way now.
 
-But it's using this kind of shared generic class, or hook, as it were.
+**But it's using this kind of shared generic class, or hook, as it were**.
 
 And what's great about this is now I can write all sorts of unit tests,and I can use this all over the place. And I can kinda guarantee to my future self that this is a really good piece of code that I can reuse over and over and over again.
 
