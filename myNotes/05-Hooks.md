@@ -169,9 +169,9 @@ And then after that, it'll be whatever it is at that point in time. **But that's
 
 **So you want to make sure that these functions are not doing anything extraneous**, right? They shouldn't be updating any function. They shouldn't have any like side effects or anything like that. You want to keep them pretty narrow to the focus of rendering something, okay? So this is a hook, that's what the react terminology is here.
 
-- :star: **And one thing that you need to abide by with hooks, all hooks begin with `use`**. Use state, use effect, use callback, use memo, all that stuff, all hooks begin with use. Even the ones like custom hooks, we're going to make a custom hook [COUGH] excuse me. We're going to make a custom hook here in just a second.
+- :star: **And one thing that you need to abide by with hooks, all hooks begin with `use`**. `useState`, `useEffect`, `useCallback`, `useMemo`, all that stuff, all hooks begin with `use`. Even the ones like custom hooks. We're going to make a custom hook here in just a second.
 
-But if you see use something, it is a hook. So this is how you have stateful logic with React is with these hooks. So now at any given time, just to demonstrate to you, I'll just say a console.log('state of location', location).
+But if you see `use`+something, it is a hook. **So this is how you have stateful logic with React is with these hooks**. So now at any given time, just to demonstrate to you, I'll just say a c`onsole.log('state of location', location)`.
 
 Or even better, let's do this.
 
@@ -181,25 +181,36 @@ That has location in it.
 So now it says Seattle, WA right there, right? And if we start typing in there, notice that it's changing alongside of, because every time it re-renders, right, it's outputting that location there. So I could put Salt Lake City, Utah.
 
 > > Speaker 2: Is using state different than setting state in this context, then, because it's setting a default, out of the box here.
-> > Yes, so useState is like creating a hook, right? So and, when you get back a hook, you get back an array of two things. The first thing is always going to be the current state of it.
 
-The second thing is always going to be an updater function for that particular piece of statement, right? So useState creates the hook. This is called set location because I chose to call it that, but you could totally call this updateLocation. It's a function that gives you back the updates that particular thing.
+### What a Hook returns
 
-I choose to always call it set because then I can kind of see it, but that's just a convention that I have. That's not an industry best practice or anything like that. Does that answer your question? Cool. I should call out here, this might look a little weird to you.
+- :star: **Yes, so `useState` is like creating a hook, right? So and, when you get back a hook, you get back an array of two things.**
+- **The first thing is always going to be the current state of it.**
+- **The second thing is always going to be an updater function for that particular piece of statement**
 
-This is also destructuring, right, because I know this is gonna be an array. This always gives back an array. And I know that the first item is always the state, and I always know the second item is the updater function. So that's why that's an array. Makes sense?
+So `useState` creates the hook. This is called set location because I chose to call it that, but you could totally call this updateLocation. It's a function that gives you back the updates that particular thing.
 
-Cool.
+I choose to always call it `set` because then I can kind of see it, but that's just a convention that I have. That's not an industry best practice or anything like that. Does that answer your question? Cool. I should call out here, this might look a little weird to you.
 
-So historically, if you've been writing React, you would have had to use something called set state, right? This is kind of supplanting the need for set state for these function components. I will show you later how to do that because it's important cuz it's still very much a part of the React ecosystem.
+### Hooks use destructuring array patterns
+
+**This is also destructuring, right, because I know this is gonna be an array. This always gives back an array. And I know that the first item is always the state, and I always know the second item is the updater function. So that's why that's an array.** Makes sense?
+
+### Hooks supplant use of setState
+
+So historically, if you've been writing React, you would have had to use something called **set state, right? This is kind of supplanting the need for set state for these function components**. I will show you later how to do that because it's important cuz it's still very much a part of the React ecosystem.
 
 But for now, this is the way to do state with hooks.
 
 ## Best Practices for Hooks
 
-An absolutely fundamental key thing that I need you to really understand right now with hooks is they never go inside of if statements, and they never go inside for loops or anything like that. Why? So I can't say like, if (something), I can't do this. This is not okay, never do this.
+### Hooks never instead conditions
 
-The way that hooks work is, basically, they're keeping track of the order that you're creating hooks. So if I have another hook underneath this, like for example, like for the animal, and setAnimal. And we'll make this dog or something like that. The way that they're keeping track of each individual piece of state is they're keeping track of the order that you're calling these things in, right?
+- :star: **An absolutely fundamental key thing that I need you to really understand right now with hooks is they never go inside of `if` statements, and they never go inside `for` loops or anything like that.**
+
+Why? So I can't say like, `if (something)`, I can't do this. This is not okay, never do this.
+
+**The way that hooks work is, basically, they're keeping track of the order that you're creating hooks**. So if I have another hook underneath this, like for example, like for the animal, and setAnimal. And we'll make this dog or something like that. **The way that they're keeping track of each individual piece of state is they're keeping track of the order that you're calling these things in**, right?
 
 So if I call these things out of order or if I have an if statement, and then, let's just imagine [INAUDIBLE], if something
 
