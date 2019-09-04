@@ -112,7 +112,7 @@ Let's talk about what the difference between prettier and eslint now. Because pe
 - **It's very much, how is this formatted, but it doesn't care about what the code actually does, right?**
   So it doesn't look like does this variable exist? - Does this you know, are we using the wrong method here? - Are we using old JavaScript here? - As long as it parses like prettier doesn't care.
 
-**Eslint is much more concerned with style, right.**
+**Eslint is much more concerned with style**
 
 It's concerned with what methods are you using? You know, accessibility friendly, right? It can check kind of those things.
 
@@ -131,7 +131,7 @@ And yes, I use a period. Did you have a question?
 
 ### What is this lock file?
 
-Speaker 2: When I ran the command in the terminal, it created a new file called package walk, is that JSON?
+> > Speaker 2: When I ran the command in the terminal, it created a new file called package walk, is that JSON?
 
 Yep, it should do that. All right, so let's let's just address that briefly. If I go back over here, it created a new file here called package Lock. So what it actually does is when you deploy your code to production, it's actually locked down the versions.
 
@@ -139,7 +139,7 @@ If you look at this you can see that it has integrity checks, and like where to 
 
 Let's say you know next week they release 1.17.1, right? If my file looks like this. It'll actually install at 1.17.1. Reason being it's because that's a patch version, so it should be compatible, right? Does that make sense? Whereas if I do MPMCI, it'll actually install exactly the versions I was using.
 
-So it'll still install MPM 1.17.0. Does that answer your question?
+So it'll still install NPM 1.17.0. Does that answer your question?
 
 > > Speaker 2: Yeah. Thank you.
 > > Cool. Yep, it's the same thing as a Yarn log file. The packaged log and Yarn log accomplish, as far as I know, exactly the same thing.
@@ -211,52 +211,53 @@ It's actually been adopted by the JS Foundation, which used to be the jQuery Fou
 
 ## gitignore
 
-We are going to create one more file here. This is going to be a gitignore file. So inside of your source directory, create a file called .gitignore.
+We are going to create one more file here. This is going to be a gitignore file. So inside of your source directory, create a file called `.gitignore`.
 Like that. Not inside your source one, this is going to go inside of your root directory inside of adopt me.
 
-And here if you are not familiar with get, this is just telling get is like, here is a bunch of stuff, I don't want you to keep a track of inside of my repo. Okay, so .getignore yes use dot. So the first thing you never want to track is node modules, because that's why you can npm install them wherever you want, right?
+**And here if you are not familiar with get, this is just telling get is like, here is a bunch of stuff, I don't want you to keep a track of inside of my repo.** Okay, so .getignore yes use dot. So the first thing you never want to track is node modules, because that's why you can npm install them wherever you want, right?
 
 And then also if you're on Mac you should always ignore DS_Store, which is a file that Mac creates for dumb reasons, let's not talk about it. Let's just say that they're dumb reasons. And then for later parts of the course, you're going to ignore your cache. You're going to ignore dist.
 
 You're going to ignore coverage. You can ignore the dot VS Code directory or not, that one's up to you. It's just where VS Code keeps track of all your personal preferences for the project, and then you're also going to ignore the .emv file. So this is just telling VS Code, ignore all this stuff, never commit this stuff.
 
-This is stuff that I just have for me and not to be put in my get repo
-Okay, so there's another commit point here. So if you fell people behind the tooling you can feel free to just jump up to this commit. It's something called like add npm scripts and ES Lint and prettier and things like that.
-
 ## Parcel
 
-So the first thing I wanna say about Parcel is that I have taught, historically in this class, I have taught Webpack and Webpack is a phenomenal tool. It is part of the OpenJS Foundation as well. There is a great course in Frontend Masters about it. If you wanna learn Webpack and React together I teach it with React V3.
+So the first thing I wanna say about Parcel is that I have taught, historically in this class, I have taught Webpack and Webpack is a phenomenal tool.
 
-And that's still totally valid if you wanna check that out. But I'm gonna use a different packager today that is called Parcel. The reason why I chose to teach with Parcel is it's extremely hands-off. You just point it at a file and it just kind of figures it everything out by itself.
+And that's still totally valid if you wanna check that out. But I'm gonna use a different packager today that is called Parcel.
 
-There's no configuration to it. Webpack is phenomenal. It's super powerful. If you have crazy things you need to do with it, Webpack is your friend in doing crazy stuff like that. But it's kinda difficult to set up. It's inevitable that with power comes complexity, right? So suffice to say I love both tools.
+**The reason why I chose to teach with Parcel is it's extremely hands-off. You just point it at a file and it just kind of figures it everything out by itself.There's no configuration to it.**
+
+Webpack is phenomenal. It's super powerful. If you have crazy things you need to do with it, Webpack is your friend in doing crazy stuff like that. But it's kinda difficult to set up. It's inevitable that with power comes complexity, right? So suffice to say I love both tools.
 
 I'm just choosing Parcel today so that we can focus on React and not necessarily focus on the bundler. What we're gonna do now is we're gonna say npm install D parcel- bundler like that. That one takes a second cuz there's a lot of stuff that comes with it.
 
-This is the actual tool that will bundle every code together, and get it ready. 1 for your development environment, and 2 for production. And it's really smart. You just point it at your index html file and it discovers all the paths just by figuring everything out. And it figures out like this is a TypeScript file, or this is a JavaScript file, or this is a CSS file and it just neatly packages everything for you.
+**This is the actual tool that will bundle every code together, and get it ready. (1) for your development environment, and (2) for production. And it's really smart. You just point it at your index html file and it discovers all the paths just by figuring everything out**. And it figures out like this is a TypeScript file, or this is a JavaScript file, or this is a CSS file and it just neatly packages everything for you.
 
 It's a pretty impressive tool.
 It's one I actually I use quite frequently. And both Webpack and Parcel definitely worth supporting. They both have open collectors, so that's something you feel inclined to do. You can see that they actually drop a link in there for you.
 Frontend Masters does, thanks Frontend Masters.
 
-Okay, so now that we've done that, I want you to go into your package.json. And we're going to add another script in here that's going to be dev.
-And this is gonna say parcel src/index.html. So again, all you have to do with Parcel is you just point it at the index.html file and it just figures everything else for you.
+Okay, so now that we've done that, I want you to go into your `package.json`. And we're going to add another script in here that's going to be `dev`.
+And this is gonna say `parcel src/index.html`. So again, all you have to do with Parcel is you just point it at the index.html file and it just figures everything else for you.
 
 So now I can go into my adopt me. Well, so first thing I wanna mention here. This was confusing to me for a long time until someone pointed it out to me. As I was like, how does it know what parcel is, right? I don't think I have parcel available here, right, it says parcel command not found.
 
+### Parcel actually downloads binary tools into .bin
+
 So like how does it know that? Well if you go inside of your node modules here, which is where all of your node, when I say npm install bundle there, that's where it goes into node modules. And there is a secret.bin directory her. Of all the various different binary tools I can use, right?
 
-And one of them in here is called parcel, which is connected to parcel-bundler. So that's how it finds it.
+And one of them in here is called `parcel`, which is connected to parcel-bundler. So that's how it finds it.
 Echo's not in here right, for example, Echo's just part of like Mac. But it is able to find parcel and prettier in here. So, just so you know that that's how that gets connected together.
 
-So now I can say, npm run dev.
+So now I can say, `npm run dev`.
 And it's gonna build all the stuff together. And it's ready in 1.76 seconds. You can see here that there's now a dist and a .cache director. That is something that Parcel creates for you. You can just basically ignore it, and I can open now.
 
 So if I Cmd + click this, it'll open in my browser. And you can see, magically, I'm running on localhost:1234, but now this is being packaged by Parcel.
 Now there's some pretty cool stuff about this. If I go into app.js and I change this to be,
 I don't know, maybe add another Adopt Me in here, and I save this.
 
-It automatically refreshes my page for you. So it does a hot model refresh for you out of the box for free. You don't have to do anything about it, it just works.
+It automatically refreshes my page for you. So it does a _hot model refresh_ for you out of the box for free. You don't have to do anything about it, it just works.
 And that's really it, we're not gonna configure parcel anymore than that. It's smart enough to figure everything else out.
 
 ## Installing React & ReactDOM
@@ -264,63 +265,82 @@ And that's really it, we're not gonna configure parcel anymore than that. It's s
 Now let's go fix this error that React doesn't know what this is. What we're going to do, if you don't know, to stop the serve you hit Ctrl-C. I think that works on any platform. You send an interrupt command to it and say stop this, right?
 So here I'm gonna say now npm install without the D because these are production dependencies, react react-dom, like that.
 
+`npm i react react-dom`
+
 So this is gonna go install our two packages off of the npm registry.
 Take a second to do that.
 Okay, now instead of going back in my index.html, I'm gonna delete these two script files. Cuz I don't wanna load these off the CD anymore, I wanna load them off of my local computer, so delete that.
 
-So all we have is the root and our app.js.
-Okay, now we're gonna go back into app.js.
-And we're gonna say up here, import React from 'react'. So this is going to import the default export from the React package, okay? And we're going to say import and I'm gonna say {render} from react-dom.
+So all we have is the root and our `app.js`.
+Okay, now we're gonna go back into `app.js`.
+And we're gonna say up here, import React from 'react'. So this is going to import the default export from the React package, okay? And we're going to say import and I'm gonna say `{render}`from `react-dom`.
+
+### npm intellisense
 
 Now, some of you might not be seeing this autocompletion here. That extension is called NPM Intellisense, which again is here. NPM Intellisense, right there,
 Quite useful. So import render from react-DOM is where we want that one to come from.
 So I show you this, I could've just done import without the curly braces here and said react-DOM like this.
 
+### importing react and react-dom
+
 And now this would work because this is called reactDOM down right here, but I wanna show you how to input the specific thing, so I wanna import just render from reactDOM. So this is saying reactDOM has a specific export called render and I want you to input just that, okay?
 
-And then down here just erase the render, so it's just render like that. So I wanna say this is similar to destructuring. It's technically not destructuring, this is just how modules work. But this is just saying react-dom has a specific instance, export render equals something, heah, question?
+And then down here just erase the `render`, so it's just `render` like that. **So I wanna say this is similar to destructuring. It's technically not destructuring, this is just how modules work.** But this is just saying `react-dom` has a specific instance, export render equals something, heah, question?
 
 > > Speaker 2: When you're using an import statement, how do you know whether or not you should use the curly braces?
 
 Is that just for if you want to import one specific feature?
 Yes.
 
+### Be explicit with what you import
+
 > > Speaker 2: Okay.
 > > For example here from React, I can actually import specific things. So like, I cannot actually just import creed element, because it specifically exports that, right? And then I wouldn't be using, I would just be using create element like that.
 
-In general, I would encourage you to do specific exports most of the time because parcel will do a thing for you called tree shaking. It actually uglifies the actual thing that does the tree shaking, but what that does is it's live code inclusion. So it will only include code that could ever potentially run.
+**In general, I would encourage you to do specific exports most of the time because parcel will do a thing for you called tree shaking. It actually uglifies the actual thing that does the tree shaking, but what that does is it's live code inclusion. So it will only include code that could ever potentially run.**
 
-So in this particular case, let's say react-dom had 1,000 methods and we're only importing 1, right, it would not include the other 999. If they packaged it correctly which is a big if because most of them don't. But like a good example that would be like low dash right?
+So in this particular case, let's say `react-dom` had 1,000 methods and we're only importing 1, right, it would not include the other 999. If they packaged it correctly which is a big if because most of them don't. But like a good example that would be like low dash right?
 
-Low dash is a huge library has like 200 methods right? And you don't, no one ever uses all 200 methods right? So what you wanna do with that is you wanna import just a few methods that you use and then it won't include the other ones, right? That is like the benefit there, potentially, it doesn't always work out that way.
+> Low dash is a huge library has like 200 methods right? And you don't, no one ever > uses all 200 methods right? So what you wanna do with that is you wanna import > just a few methods that you use and then it won't include the other ones, right? > That is like the benefit there, potentially, it doesn't always work out that way.
 
-For me it just helps me to be explicit that I know this only uses render from react-dom. So what I wanted to get to is, this actually isn't helpful, because if you include react-dom you get the whole thing, because it's not packaged for tree shaking. And then the other thing is that there's not a lot of wasteful stuff inside react-dom, so there's not a lot to tree shake out anyway.
+For me it just helps me to be explicit that I know this only uses render from react-dom. So what I wanted to get to is, this actually isn't helpful, because if you include `react-dom` you get the whole thing, because it's not packaged for tree shaking. And then the other thing is that there's not a lot of wasteful stuff inside react-dom, so there's not a lot to tree shake out anyway.
+
+- BH just belies is argument with the point above, but I think it's more explicit for you (and he mentions this) to just be specific with what you want to export if it makes code more readable for you / others.
 
 So now if we save this and go back over to our project, it should still work, right? So now, you have to run the project of course, npm run dev, like that.
 Once it's finished building, you can see this looks like a JS file that's loading, it's only loading this app.js file.
 
 And it's not loading anything else, it's not loading like those other files from the repo. So you can see that that reacts now being included inside of our app.js instead of being loaded from some other CDN. And you can see that it's much larger than it used to be here, now it's 965 KB instead of being, like the probably 5 it was before because it includes React.
 
-Now keep in mind this is the development environment which means it's massive. If I patched this for production it would be much, much smaller. So don't worry about file sizes until you actually do the production builds, so just keep that in mind.
+**Now keep in mind this is the development environment which means it's massive. If I patched this for production it would be much, much smaller. So don't worry about file sizes until you actually do the production builds, so just keep that in mind.**
 Right now, this project would probably be 35 KB, I guess, cuz React is about 32.
 
 ## Separate App into Modules
 
-So now we have a bundler, we can do whatever we want, right? Now we have more leeway to do things. So the first thing I want to do here is I want to split pet and app into two different files, right? I can't think of a reason why you would not have one component, one file.
+So now we have a bundler, we can do whatever we want, right? Now we have more leeway to do things. So the first thing I want to do here is _I want to split pet and app into two different files_, right? I can't think of a reason why you would not have one component, one file.
 
-It's always that way. You don't ever have two components in a file. I've not really seen a good reason to do that before. So one component, one file. So I'm gonna show you a pretty cool trick that VS Code can do for you. So I'm gonna highlight this and then I get this little light bulb here.
+It's always that way. **You don't ever have two components in a file.** I've not really seen a good reason to do that before. **So one component, one file**. So I'm gonna show you a pretty cool trick that VS Code can do for you. So I'm gonna highlight this and then I get this little light bulb here.
 
-This light bulb is called a code action. So I'm gonna click that and there's a couple things here. The one that I want is move, you might not see all of these because I have other extensions installed. But the one that you wanna do is move to a new file, which all of you should see, right?
+### VSCode Light Bulb Magic
 
-So click move to a new file. And all the sudden I have a new Pet.js file which has an export in it, and app is importing from that file. It's pretty cool, right, you like this, cool? Okay, cool. So what's really cool about it is, it's actually TypeScript that does that for you.
+- :star: This light bulb is called a **code action**. So I'm gonna click that and there's a couple things here. The one that I want is move, you might not see all of these because I have other extensions installed. But the one that you wanna do is _move to a new file_, which all of you should see, right?
+
+So click move to a new file. And all the sudden I have a new `Pet.js`file which has an export in it, and app is importing from that file. It's pretty cool, right, you like this, cool? Okay, cool. So what's really cool about it is, it's actually TypeScript that does that for you.
 
 It's not VS Code. TypeScript is actually running on your code, even though we're not writing any TypeScript right now. VS Code is constantly running TypeScript against your code, to understand how your code works. And so that's what's actually able to do that. Now, I prefer default exports, so I'm gonna change this to get rid of those curly braces, and save that.
 
-And then here, instead of saying, export const Pet = blah, I'm gonna say export default function blah like that. And let's give this a name like so.
+And then here, instead of saying, export const `Pet =` blah, I'm gonna say export `default function` blah like that.
+
+`export default function Pet({...}) {`
+
+And let's give this a name like so.
+
+### Why default exports?
+
 Now why do I do that? It's just kind of a pattern that I had that the default export for components is always the component.
 
 I would say it's a decently common pattern, but I'll leave you to judge it for yourself.
-As far as changing it to a named component, this is useful for when you're debugging things. Because if there's a stack trace, you'll see pet has the error, which makes that a little bit easier to debug later.
+**As far as changing it to a named component, this is useful for when you're debugging things**. _Because if there's a stack trace, you'll see pet has the error, which makes that a little bit easier to debug later_.
 
 So now, we have two different files, right? We're importing pet from pet. This should still work the way it should. It does. But now they're a little bit better organized now that we have an app component and a pet component, and they're in separate files and we can maintain them separately.
 
@@ -329,8 +349,9 @@ So this one is the add Parcel, build process and extract out Pet components so t
 
 Okay and so we used Parcel. I told you could use Webpack this would 100% work with Webpack as well. You could also use Browserify, which is another great project for bundling code. It still works really well despite what other people might say. It's a bit older, but it still works great.
 
-Or you could use Rollup as well. Roll up is a bit more unwieldy sometimes a little bit harder to use, but works well, as well. At this point, now we've introduced a package.json so if you're moving forward and commit points in the course, make sure you move forward in the commit, and then you run npm install afterwards, right?
+### Commit # to catch up.
+
+At this point, now we've introduced a package.json so if you're moving forward and commit points in the course, make sure you move forward in the commit, and then you run npm install afterwards, right?
 
 So if I come to my terminal here, not this one, this one. And I say, if I moved forward in the commit, I would have to say, npm install, just like that. And it's gonna go run and install everything off of the npm registry. You don't have to do this if you've been following along, but just so you know, make sure that you're always keeping up with the npm installs as well.
-
 Otherwise, things won't work.
