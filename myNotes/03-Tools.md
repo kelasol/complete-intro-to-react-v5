@@ -112,24 +112,30 @@ Let's talk about what the difference between prettier and eslint now. Because pe
 - **It's very much, how is this formatted, but it doesn't care about what the code actually does, right?**
   So it doesn't look like does this variable exist? - Does this you know, are we using the wrong method here? - Are we using old JavaScript here? - As long as it parses like prettier doesn't care.
 
-Eslint is much more concerned with style, right. It's concerned with what methods are you using? You know, accessibility friendly, right? It can check kind of those things.
+**Eslint is much more concerned with style, right.**
+
+It's concerned with what methods are you using? You know, accessibility friendly, right? It can check kind of those things.
 
 Does that make sense? So you can have eslint check some of the mechanical stuff. But it doesn't have the power that prettier does for that kind of stuff. So that's why we're going to install the prettier config, to basically say hey eslint. That stuff that you sometimes worry about like spacing, don't worry about it because prettier has it, right?
 
 So install both of those.
-Okay, and now we have both of these. Eslint-config prettier, eslint, and now we're going to go create A eslint-rc as well. So make a new file, save it. And call this .eslint-c.Json.
-They require you give it the extension, whereas .prettierrc does not.
+Okay, and now we have both of these. Eslint-config prettier, eslint, and now we're going to go create A eslintrc as well. So make a new file, save it.
+
+And call this `.eslint-c.json`.
+They require you give it the extension, whereas `.prettierrc` does not.
+
+- eslintrc requires extension on rc where prettierrc does not.
 
 Because you can also configure this in YAML, as well as in JavaScript as well. But we're gonna do the JSON way of doing it right now.
 And yes, I use a period. Did you have a question?
 
-> > Speaker 2: When I ran the command in the terminal, it created a new file called package walk, is that JSON?
+### What is this lock file?
 
-Yep, it should do that. All right, so let's let's just address that briefly. If I go back over here, it created a new file here called package Lock. So package lock is a lock file. [LAUGH] So what it actually does is when you deploy your code to production, it's actually locked down the versions.
+Speaker 2: When I ran the command in the terminal, it created a new file called package walk, is that JSON?
+
+Yep, it should do that. All right, so let's let's just address that briefly. If I go back over here, it created a new file here called package Lock. So what it actually does is when you deploy your code to production, it's actually locked down the versions.
 
 If you look at this you can see that it has integrity checks, and like where to download it from and what version it's on and stuff like that. And you want it to have this, because now I can install exactly the correct versions in productions. So, what I'm running in my computer, is exactly what's running on production.
-
-So, the way that you do that when you're running in production, don't do this on your local computer, but if I do it npm, oops, npm ci. It'll actually use the package lock and sort of package of JSON to install exactly the correct version, right? Whereas if you do NPM install see if I got a package of JSON here.
 
 Let's say you know next week they release 1.17.1, right? If my file looks like this. It'll actually install at 1.17.1. Reason being it's because that's a patch version, so it should be compatible, right? Does that make sense? Whereas if I do MPMCI, it'll actually install exactly the versions I was using.
 
@@ -140,8 +146,10 @@ So it'll still install MPM 1.17.0. Does that answer your question?
 
 ## ESLint Configuration
 
-So back to our eslint.json.
+So back to our `.eslint.json`.
 So, we're gonna create a file here, this one we do have to configure a little bit. So, the first one we say is extends, and we get an array of things that extends, right? So this is like sets of rules to use.
+
+### eslint: recommended
 
 So, the first one that I'm gonna say is use eslint:recommended.
 Then we're gonna use prettier and prettier/react.
@@ -149,27 +157,33 @@ So, what is extends, right? So ESLint is configurable down to the rule, right? S
 
 Like everything in eslint:recommended everyone should be running all the time. I don't think it's a controversial opinion to state, right? It's a pretty bare minimum set of things, like don't have variables that you never use. That's one of them, right? Or don't use with or something like that, right, which is like a super old construct in JavaScript.
 
+### Why recommended?
+
 Now, there is a bunch of ESLint configs, right? There's standard, which I taught previously before. There's airbnb, which is one that I taught as well before. And those ones are much more opinionated. And so I've kind of just started using esl recommended because, again, it kind of goes along with my methodology that anytime that you introduce friction to a developers' ecosystem, they start writing codes slower because they're fighting with tools instead of writing code, right?
 
-So, in general, I want developers to write code however it flows into their brain, right? And not hinder them, and only hinder them on things that are totally necessary, right? So this will catch bugs, but it's not gonna force you to write code in a specific way. Does that make sense?
+So, in general, **I want developers to write code however it flows into their brain, right? And not hinder them, and only hinder them on things** that are totally necessary, right? So this will catch bugs, but it's not gonna force you to write code in a specific way. Does that make sense?
 
 And how opinionated you wanna get about that is up to you.
 Okay, so this is those, we're gonna say plugins. We're not gonna give it any plugins right now, but just lets go ahead and put that in there, we will put some in there later.
-ParserOptions,
 
-Okay, so the ecmaVersion we're gonna be using, let's do 2018.
-So we're gonna be using the latest version of it that it understands, which is 2018. I don't think 2019 is quite out yet. SourceType. We're gonna be using modules, ecmaFeatures, we're gonna be using jsx, which is to true
+### parserOptions
 
-So, ecmaVersion 2018, this means we can use things like async/await, we can use things like things like that. Module means that we're gonna be using import and export, right, es modules. EcmaFeatures, jsx in a second, we're gonna be writing jsx here. So we're just going to put that in there so it understands that.
+ParserOptions,Okay, so the ecmaVersion we're gonna be using, let's do 2018.
+So we're gonna be using the latest version of it that it understands, which is 2018. I don't think 2019 is quite out yet.
 
-And then two more things down here at the bottom. Env, we're going to be using es6, so it's not going to choke on things like a async/await, for example.
+SourceType. We're gonna be using modules, ecmaFeatures, we're gonna be using jsx, which is to true
+
+So, ecmaVersion 2018, this means we can use things like _async/await_, we can use things like things like that. Module means that we're gonna be using import and export, right, es modules. EcmaFeatures, jsx in a second, we're gonna be writing jsx here. So we're just going to put that in there so it understands that.
+
+And then two more things down here at the bottom.
+Env, we're going to be using es6, so it's not going to choke on things like a async/await, for example.
 So, es6 true, one of them is going to be browser true. So this means there's going to be things like setTimeout and document and window and things like that.
 
-And node, cuz eventually we will be writing node later in this class. So, don't choke on things like HTTP and require, and things like that. So these are your defining global variables, okay? I use this ESLint file frequently, so this is a pretty good just like baseline ESLint file, it's not super opinionated.
+And node, cuz eventually we will be writing node later in this class. So, don't choke on things like HTTP and require, and things like that. **So these are your defining global variables, okay? I use this ESLint file frequently, so this is a pretty good just like baseline ESLint file, it's not super opinionated**.
 
 Okay, next thing I want you to do inside of your package.json, we're gonna put another command in here. And put lint,
-And we're going to put eslint, and we're going to put that inside of.
-Quotes here, and we're going to put it in everything inside of src\*_/_.js and jsx.
+
+`"lint": "eslint \"src/**/*.{js,jsx}\" --quiet`
 
 Except we're not even gonna do jsx today in terms of pass, whatever, you can leave it like that. That's what my notes have. And then you can put in here --quiet, it's kind of noisy and quiet just kind of removes some of the noise from that.
 So, now, whenever we run ESLint, it's gonna run ESLint across our app.js file as well.
@@ -178,7 +192,7 @@ But whatever js files we put in there, it will run.
 So, just to kinda prove my point to you, we're gonna say npm run lint.
 And looks like we have something. Which we should, right? It says react is not defined because it doesn't know where react is coming from.
 
-So, if we come into our app.js, it's gonna say, hey, what's react? I don't know what that is. So where did that come from? Which is what it should say, right? Because it doesn't know.
+So, if we come into our `app.js`, it's gonna say, hey, what's react? I don't know what that is. So where did that come from? Which is what it should say, right? Because it doesn't know.
 So, we'll fix that here in a second, but now this is working.
 
 Now, again, I don't run that npm run lint command very often because now it's just inside of my editor, right? I can see that red underline, I can hover over and say, this is not defined, you need to fix this. So, I'm gonna show you how to do that as well.
@@ -189,9 +203,9 @@ So, if you don't like ESLint 1, you should, cuz I think it's a great tool. It's,
 
 You created this very well and you never use it, so why do you have it, right? And often that's a case of, let's say, I went down here and I accidentally set React.createElement(Ap) with one P, right? It's gonna say, I don't know what that is, right? So, it immediately highlights these errors like this, or if I put three Ps in there or something like that.
 
-It helps me catch a lot of really common dumb errors like that very quickly. As opposed to when I go to play into production and everything crashes because I put an extra P in there, not that I've ever done that. So, big fan. So, I like ESLint because it's very extensible.
+**It helps me catch a lot of really common dumb errors like that very quickly**. As opposed to when I go to play into production and everything crashes because I put an extra P in there, not that I've ever done that. So, big fan. So, I like ESLint because it's very extensible.
 
-So you and I can both write custom ESLint rules. When I worked at Netflix, we had a ton of custom ESLint rules. But there are other tools, one of them would be JSHint which has been around forever. There's JSLint which Douglas Crockford created. But I'll just say that ESLint is very much the standard and it's the one I suggest that you use.
+So you and I can both write custom ESLint rules. When I worked at Netflix, we had a ton of custom ESLint rules. But there are other tools, one of them would be JSHint which has been around forever. There's JSLint which Douglas Crockford created. But **I'll just say that ESLint is very much the standard and it's the one I suggest that you use**.
 
 It's actually been adopted by the JS Foundation, which used to be the jQuery Foundation and is now called the OpenJS Foundation, so.
 
